@@ -11,9 +11,6 @@ const cors = require('cors');
 
 
 const userRoute = require('./route/userRoute');
-const workoutRoute = require('./route/workoutRoute')
-const mealRoute = require('./route/mealRoute')
-const exerciseRoute = require('./route/exerciseRoute')
 const bookingRoute = require('./route/bookingRoute')
 const tourRoute = require('./route/tourRoute');
 const reviewRoute = require('./route/reviewRoute');
@@ -58,12 +55,9 @@ app.use(cors());
 
 
 app.use('/api/v1/users', userRoute);
-app.use('/api/v1/workouts', workoutRoute);
-app.use('/api/v1/meal', mealRoute);
-app.use('/api/v1/exercise', exerciseRoute);
 app.use('/api/v1/booking', bookingRoute);
 app.use('/api/v1/tours', tourRoute);
-// app.use('/api/v1/reviews', reviewRoute);
+app.use('/api/v1/reviews', reviewRoute);
 
 app.all('*', (req, res, next) => {
 
@@ -75,41 +69,7 @@ app.use(errorHandler);
 
 module.exports = app;
 
-// app.get("/status", (req, res) => {
-//     const status = {
-//         'status': "running"
-//     }
 
-//     res.send(status)
-// } );
-
-// app.post("/posting", (req, res) => {
-    
-//     console.log( req )
-// })
-
-// app.get('/api/v1/tours', (req, res) => {
-//     res.status(200).json({
-//         status: 'success',
-//         data: {
-//             tours: "tours"
-//         }
-//     })
-
-// })
-
-// app.post('/api/v1/tours', (req, res) => {
-//     console.log(req.body);
-//     res.send("done");
-// })
-
-// app.get('/api/v1/tours/:id', (req, res) => {
-//     console.log(req.params.id);
-    
-//     res.status(200).json({
-//         message: "ok"
-//     })
-// })
 
 
 
