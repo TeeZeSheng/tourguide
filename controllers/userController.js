@@ -1,5 +1,4 @@
 const User = require("../models/User")
-const Progress = require("../models/Progress")
 const AppError = require("../utils/appError")
 const catchAsync = require("../utils/catchAsync")
 const multer = require('multer');
@@ -63,33 +62,6 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.createUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'route not yet defiend",'
-    })
-}
-
-exports.getUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'route not yet defiend",'
-    })
-}
-
-exports.updateUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'route not yet defiend",'
-    })
-}
-
-exports.deleteUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'route not yet defiend",'
-    })
-}
 
 exports.getMe = (req, res, next) => {
     req.params.id = req.user.id;
@@ -119,24 +91,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
 })
 
-exports.setPreference = catchAsync( async (req, res, next) => {
-    const { level, goal } = req.body;
-
-    const user = await User.findById(req.user.id);
-    user.level = level;
-    user.goal = goal;
-    await user.save();
-
-    if(!user) {
-        return next(new AppError('user not found', 400));
-    }
-
-    res.status(200).json({
-        status: 'success',
-
-    })
-})
-
 exports.deleteMe = catchAsync(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user.id, {active: false});
 
@@ -146,49 +100,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.setProgress = catchAsync( async (req, res, next) => {
-    const progress = await Progress.create({
-        workout: req.body.name,
-        date: req.body.date,
-        user: req.body.user
-    })
-
-    res.status(200).json({
-        status: 'success',
-
-    })
-})
-
-exports.getProgress = catchAsync( async (req, res, next) => {
-    const progress = await Progress.aggregate([
-        {
-            $lookup: {
-              from: 'workouts', // Name of the collection to join
-              localField: 'workout', // Field from the orders collection
-              foreignField: '_id', // Field from the users collection
-              as: 'workoutItems', // Name of the array field to add to the output documents
-            }
-          },
-          {
-            $unwind: '$workoutItems' // Unwind the array to include user details as an object
-          },
-        {
-            $match: { user: req.user._id }
-        },
-        
-        {
-            $sort: {
-                date: -1
-            }
-        }
-    ]);
-
-    res.status(200).json({
-        data: {
-            progress
-        }
-    })
-})
 
 exports.getOneUser = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id)
