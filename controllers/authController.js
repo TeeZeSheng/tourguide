@@ -21,8 +21,6 @@ exports.signup = catchAsync(async (req, res, next) => {
         passwordConfirm: req.body.passwordConfirm,
         passwordChangedAt: req.body.passwordChangedAt,
         role: req.body.role,
-        level: req.body.level,
-        goal: req.body.goal,
     });
     // const url = 0;
     // await new Email(newUser, url).sendWelcome();
