@@ -82,13 +82,13 @@ userSchema.pre(/^find/, function(next) {
     next();
 })
 
-userSchema.pre(/^find/, function(next) {
-    this.populate({
-        path: 'workout',
-    })
+// userSchema.pre(/^find/, function(next) {
+//     this.populate({
+//         path: 'workout',
+//     })
 
-    next();
-})
+//     next();
+// })
 
 userSchema.methods.correctPassword = function(candidatePassword, userPassword) {
     return bcrypt.compare(candidatePassword, userPassword);
