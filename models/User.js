@@ -56,35 +56,6 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: true,
         select: false,
-    },
-    workout: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Workout'
-        }
-
-    ],
-    customWorkout: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Workout'
-        }
-    ],
-    mealPlan: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'MealPlan'
-        }
-    ],
-    goal: {
-        type: String,
-        // required: [true, 'fitness goal cannot be empty'],
-        
-    },
-    level: {
-        type: String,
-        // required: [true, 'fitness level cannot be empty'],
-        
     }
 })
 
