@@ -35,6 +35,6 @@ router.route('/getProgress/:userId').get(authController.protect, userController.
 
 router.get('/getUser/:id', authController.protect, userController.getOneUser)
 
-router.get('/getMyMealPlan/:id', mealPlanController.getMyMealPlan)
+
 
 module.exports = router;
